@@ -15,10 +15,12 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AdminPanelSettings
 import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.MovieFilter
 import androidx.compose.material.icons.filled.Publish
 import androidx.compose.material.icons.outlined.AdminPanelSettings
 import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.MovieFilter
 import androidx.compose.material.icons.outlined.Publish
 import androidx.compose.material3.Icon
@@ -69,6 +71,7 @@ import com.example.ui.screens.ClipsScreen
 import com.example.ui.screens.PlansAndAdminScreen
 import com.example.ui.screens.PublishHubScreen
 import com.example.ui.screens.StudioScreen
+import com.example.ui.screens.WebStudioScreen
 import com.example.ui.theme.ClipGeniusTheme
 import com.example.ui.theme.ElectricViolet
 import com.example.ui.theme.ObsidianBlack
@@ -108,6 +111,7 @@ private enum class MainTab(
     STUDIO("studio", "Studio", Icons.Filled.AutoAwesome, Icons.Outlined.AutoAwesome),
     CLIPS("clips", "Clips", Icons.Filled.MovieFilter, Icons.Outlined.MovieFilter),
     PUBLISH("publish", "Publish", Icons.Filled.Publish, Icons.Outlined.Publish),
+    WEB("web", "Web", Icons.Filled.Language, Icons.Outlined.Language),
     PLANS("plans", "Plans", Icons.Filled.AdminPanelSettings, Icons.Outlined.AdminPanelSettings)
 }
 
@@ -324,6 +328,12 @@ private fun AuthenticatedClipGeniusShell(user: FirebaseUser) {
                         onConnectAccount = viewModel::connectSocialAccount,
                         onUpdateAccount = viewModel::updateSocialAccount,
                         onDisconnectAccount = viewModel::disconnectSocialAccount,
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    MainTab.WEB -> WebStudioScreen(
+                        viewModel = viewModel,
+                        onOpenNativeClipEditor = { clipId -> activeEditorClipId = clipId },
                         modifier = Modifier.weight(1f)
                     )
 
